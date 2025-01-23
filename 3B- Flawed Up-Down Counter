@@ -1,0 +1,47 @@
+// Connect pin 8 ro Switch1
+int switch1=8;
+// Connect pin 9 to Switch2
+int switch2=9;
+int count=0;
+
+#include <LiquidCrystal.h>
+// initialize the library with the numbers of the interface pins
+// LiquidCrystal lcd(RS, E, D4, D5, D6, D7)
+LiquidCrystal lcd(7, 6, 5, 4, 3, 2);
+
+void setup()
+{
+// set up the LCD's number of columns and rows:
+  lcd.begin(16, 2);
+// Print a message to the LCD.
+  lcd.print("Up-Down Counter");
+  // Declare Switches as INPUT to Arduino
+  pinMode(switch1,INPUT);
+  pinMode(switch2,HIGH);
+  digitalWrite(switch1,HIGH);
+  digitalWrite(switch2,HIGH);
+}
+void loop()
+{
+  // if Switch1 is pressed perform action described in loop
+  if(digitalRead(switch1)==LOW)
+  {
+    // Count up by 1
+    count++;
+    lcd.setCursor(0,1);
+    lcd.print(count);
+    delay(400);
+  }
+  
+  // if Switch2 is pressed perform action described in loop
+  if(digitalRead(switch2)==LOW)
+     {
+       // COunt down by 1 
+       count--;
+       if(count < 0)
+         count = 0;
+       lcd.setCursor(0,1);
+       lcd.print(count);
+       delay(400);
+     }
+     }
