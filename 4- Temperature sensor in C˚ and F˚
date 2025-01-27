@@ -1,0 +1,31 @@
+// How cold is it?
+
+#include <LiquidCrystal.h> 
+// Include the library code
+LiquidCrystal lcd(12,11,5,4,3,2); // Initialize the library
+
+void setup()
+{
+  // the setup code runs once 
+  Serial.begin(9600); // Set data rate for serial data transmission 
+  lcd.begin(16,2); // Initialize rows in lcd screen
+}
+
+void loop()
+{
+  // The main code runs repeatedly
+  int sensorValue = analogRead(A0); // Declare sensorValue as analog
+  float millivolt = (sensorValue/1024.0) * 5000.0; // Millivolts
+  float tempC = (millivolt - 500) / 10; // Celsius
+  float tempF = 1.8*tempC + 32; // Fahrenheit
+  
+  Serial.println(tempC); // Display Celcius on serial monitor
+  Serial.println(tempF);// Display Farenheit on serial monitor
+  
+  lcd.setCursor(0, 0);
+  lcd.print (tempC); // Display temp (˚C) on LCD
+  lcd.print("Celsius");
+  lcd.print (tempF); // Display temp (˚F) on LCD
+  lcd.print ("Fahrenheit");
+    delay(3000);
+}
