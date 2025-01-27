@@ -25,6 +25,7 @@ void loop()
   lcd.setCursor(0, 0);
   lcd.print (tempC); // Display temp (˚C) on LCD
   lcd.print("Celsius");
+  lcd.setCursor(0, 1);
   lcd.print (tempF); // Display temp (˚F) on LCD
   lcd.print ("Fahrenheit");
     delay(3000);
