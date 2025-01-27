@@ -41,6 +41,8 @@ void loop()
        if(count < 0)
          count = 0;
        lcd.setCursor(0,1);
+       lcd.print("                     ");
+       lcd.setCursor(0,1);
        lcd.print(count);
        delay(400);
      }
