@@ -1,0 +1,35 @@
+// Set up needed for LCD
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+// Set up needed for DHT11 temperature / humidity sensor
+#include <dht.h>
+#define dht_pin 7
+dht DHT;
+
+void setup()
+{
+  lcd.begin(16,2);
+  lcd.setCursor(0,0);
+  lcd.print("Lab 5");
+  lcd.setCursor(0,1);
+  lcd.print("DHT Sensor");
+  delay(2000);
+}
+
+void loop()
+{
+  // Start of program
+  DHT.read11(dht_pin);
+  lcd.setCursor(0,0);
+  lcd.print("Temp: ");
+  lcd.print((DHT.temperature));
+  lcd.print((char)223);
+  lcd.print("C");
+  lcd.setCursor(0,1);
+  lcd.print("Humidity: ");
+  lcd.print(DHT.humidity);
+  lcd.print("%");
+  // Wait 5 seconds before accessing sensor again.
+  delay(5000);
+}
