@@ -1,5 +1,3 @@
-if (switchState!=preSwitchState).
-
 // Ask the Crystal Ball!
 
 #include <LiquidCrystal.h>
