@@ -1,0 +1,41 @@
+#include <Servo.h>
+// the servo will connect to pin 9 
+const int servo_pin = 9;
+// Joystock ground pin will connect to Arduino analog pin A3
+const int gnd_joy_pin = A3;
+// Joystock +5 V pin will connect to Arduino analog pin A2
+const int vout_joy_pin = A2;
+// X axis reading from joystick will go into will go into Arduino analog pin A1
+const int xAxis = A1;
+Servo myservo ;
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(vout_joy_pin, OUTPUT);
+  pinMode(gnd_joy_pin, OUTPUT);
+  digitalWrite(vout_joy_pin, HIGH);
+  digitalWrite(gnd_joy_pin, LOW);
+  myservo.attach(servo_pin);
+}
+
+void loop()
+{
+  // Initial delay of 200 miliseconds
+  delay(200);
+  // Read joystick input on pin A1
+  int joy_xVal = analogRead(xAxis);
+  // Print the value from A1
+  Serial.print(joy_xVal);
+  // Print "= input from joystick" next to the value
+  Serial.println("= input from joystick");
+  // The joy_xVal will take on a value between 0 and 1023. 
+  float fraction = joy_xVal/1023.0;
+  // Convert the fraction to an angle between 0 and 180 and print 
+  Serial.print(fraction*180);
+  // Print " - output to servo" next to the value 
+  Serial.println("= output to servo");
+  Serial.println();
+  // Write the calculated angular value to the servo
+  myservo.write(fraction*180);
+}
